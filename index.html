@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Junchen Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#060a1c;--card:#0e1433;--ink:#eef2ff;--sub:#8fa3d8;--pink:#4d8dff;--pink2:#14224f;--line:#243a7a;color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{min-height:100%;background:var(--bg)}
+.fx{position:fixed;left:0;right:0;top:0;bottom:0;height:100vh;height:100lvh;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(circle at 15% 10%,#4d8dff33,transparent 45%),radial-gradient(circle at 90% 70%,#ff4fa333,transparent 45%)}
+.fx canvas{position:absolute;inset:0;width:100%;height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Prompt',system-ui,sans-serif;padding-bottom:40px}
+.wrap{max-width:480px;margin:0 auto;position:relative;z-index:1}
+.cover{height:170px;background:linear-gradient(135deg,#0b1f6b,#2f6bff 55%,#ff4fa3);border-radius:0 0 28px 28px;position:relative;overflow:hidden}
+.cover i{position:absolute;font-style:normal;font-size:26px;opacity:.7}
+.profile{position:relative;z-index:3;text-align:center;margin-top:-168px;padding:0 20px}
+.avatar{width:104px;height:104px;border-radius:50%;background:var(--card);border:4px solid var(--card);box-shadow:0 0 18px #4d8dff88;margin:0 auto;display:grid;place-items:center;font-size:44px}
+h1{font-size:22px;margin:10px 0 2px}
+.sub{color:var(--sub);font-size:14px;margin:0}
+.svc{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0 2px}
+.sv{font-size:14px;font-weight:500;padding:7px 16px;border-radius:99px;background:var(--card);border:1px solid var(--line)}
+.sv.d{border-color:#4d8dff;box-shadow:0 0 12px #4d8dff66}
+.sv.s{border-color:#ff4fa3;box-shadow:0 0 12px #ff4fa366}
+.tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:12px 0}
+.tag{background:var(--pink2);color:var(--ink);font-size:13px;padding:5px 12px;border-radius:99px}
+.btns{display:flex;gap:10px;justify-content:center;margin:14px 0 6px}
+.btn{border:0;border-radius:99px;padding:11px 22px;font:500 15px 'Prompt',sans-serif;background:linear-gradient(90deg,#3b82ff,#ff4fa3);color:#fff;cursor:pointer;box-shadow:0 0 14px #4d8dff88}
+.btn.o{background:transparent;color:var(--pink);border:2px solid var(--pink);box-shadow:none}
+section{padding:22px 18px 0}
+h2{font-size:17px;margin:0 0 4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:0 0 16px #4d8dff30}
+.row{display:flex;gap:8px;margin-top:10px}
+input{flex:1;min-width:0;border:2px solid var(--line);background:var(--bg);color:var(--ink);border-radius:14px;padding:11px 14px;font:15px 'Prompt',sans-serif}
+input:focus{outline:none;border-color:var(--pink)}
+#res{margin-top:14px}
+.md{position:fixed;inset:0;z-index:20;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.md.on{display:flex}
+.mc{position:relative;background:var(--card);border:1px solid var(--pink);box-shadow:0 0 24px #39ff1466;border-radius:22px;padding:22px 18px 18px;width:100%;max-width:400px;max-height:80vh;overflow:auto}
+.mc h2{margin-bottom:6px;padding-right:34px}
+.x{position:absolute;top:12px;right:12px;border:0;background:var(--pink2);color:var(--pink);width:30px;height:30px;border-radius:50%;font-size:14px;cursor:pointer}
+.item{border:1px solid var(--line);border-radius:14px;padding:12px;margin-top:10px;background:var(--bg)}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;gap:8px}
+.st{font-size:12px;padding:3px 10px;border-radius:99px;font-weight:500;white-space:nowrap}
+.st.wt{background:#3a3a12;color:#ffe94d}
+.st.go{background:linear-gradient(90deg,#3b82ff,#ff4fa3);color:#fff}
+.st.ok{background:var(--pink2);color:var(--pink);border:1px solid var(--pink)}
+.bar{height:12px;border-radius:99px;background:var(--pink2);margin:8px 0 6px;border:1px solid var(--line);position:relative}
+.bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#3b82ff,#8b5cf6,#f3b3dc,#3b82ff);background-size:200% 100%;position:relative;overflow:hidden;animation:flow 3s linear infinite,pulse 2s ease-in-out infinite;box-shadow:0 0 12px #4d8dffaa,0 0 20px #f3b3dc55}
+.bar i::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-40%;background:linear-gradient(90deg,transparent,#ffffffaa,transparent);animation:shine 2.2s ease-in-out infinite}
+@keyframes flow{to{background-position:200% 0}}
+@keyframes pulse{50%{box-shadow:0 0 18px #4d8dff,0 0 32px #f3b3dc88}}
+@keyframes shine{to{left:110%}}
+@media (prefers-reduced-motion:reduce){.bar i,.bar i::after{animation:none}}
+.bt{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);margin-bottom:4px}
+.bt b{color:var(--pink)}
+.qb{display:inline-block;background:linear-gradient(90deg,#3b82ff,#ff4fa3);color:#fff;font-weight:600;font-size:14px;padding:4px 14px;border-radius:99px;margin-right:8px;box-shadow:0 0 12px #4d8dff88,0 0 20px #ff4fa355;animation:pop .45s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pop{0%{transform:scale(.5);opacity:0}100%{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.qb{animation:none}}
+.big{font-size:30px;font-weight:600;color:var(--pink);text-shadow:0 0 10px #39ff1499}
+.dots{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin:10px 0 4px}
+.dot{aspect-ratio:1;border-radius:50%;background:var(--line)}
+.dot.on{background:var(--pink)}
+.muted{color:var(--sub);font-size:13px}
+.hint{font-size:12px;color:var(--sub);margin-top:10px}
+nav{z-index:5;position:fixed;left:0;right:0;bottom:0;padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px));background:var(--card);border-top:1px solid var(--line);display:flex;justify-content:space-around;max-width:480px;margin:0 auto}
+nav a{color:var(--sub);text-decoration:none;font-size:12px;text-align:center}
+nav a b{display:block;font-size:20px}
+
+/* กรอบค้นหาคิว: กระจกฝ้าไล่สี (สไตล์ Liquid Glass) */
+#chk .card{position:relative;overflow:hidden;border-radius:28px;border:1px solid rgba(255,255,255,.22);border-top-color:rgba(255,255,255,.5);border-left-color:rgba(255,255,255,.38);background:linear-gradient(155deg,rgba(77,141,255,.42) 0%,rgba(139,92,246,.30) 52%,rgba(255,79,163,.20) 100%);-webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -14px 28px rgba(77,141,255,.18),0 14px 40px rgba(77,141,255,.35),0 0 24px rgba(255,79,163,.15)}
+#chk .card::before{content:"";position:absolute;left:-10%;top:-30%;width:120%;height:60%;background:radial-gradient(ellipse at 30% 0%,rgba(255,255,255,.35),transparent 65%);pointer-events:none}
+#chk .card>*{position:relative}
+#chk .card input{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1px 0 rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#chk .card input::placeholder{color:rgba(238,242,255,.6)}
+#chk .card input:focus{border-color:rgba(255,255,255,.7);box-shadow:0 0 0 3px rgba(77,141,255,.35)}
+#chk .card .item{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+#chk .card .bar{background:rgba(6,10,28,.35);border-color:rgba(255,255,255,.2)}
+#chk .card .muted,#chk .card .hint{color:#d5def7}
+#chk .card .bt{color:#f2f5ff;font-weight:500;text-shadow:0 1px 3px rgba(6,10,28,.55)}
+#chk .card .bt b{color:#fff;font-weight:600;text-shadow:0 1px 3px rgba(6,10,28,.55)}
+
+/* ปุ่มค้นหา: ปุ่มกระจกทรงแคปซูล ไล่สีฟ้า-ม่วง-ชมพู */
+#chk .card .btn{position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(255,255,255,.5);border-bottom-color:rgba(255,255,255,.2);border-radius:99px;padding:11px 24px;color:#fff;font-weight:600;text-shadow:0 1px 2px rgba(6,10,28,.35);background:linear-gradient(100deg,rgba(77,141,255,.78) 0%,rgba(139,92,246,.68) 50%,rgba(255,79,163,.74) 100%);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,255,255,.65),inset 0 -6px 12px rgba(255,255,255,.12),-6px 10px 16px -6px rgba(77,141,255,.6),8px 10px 16px -6px rgba(255,79,163,.55);transition:transform .15s,box-shadow .15s}
+#chk .card .btn::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.2) 45%,rgba(255,255,255,.08) 100%);pointer-events:none}
+#chk .card .btn:active{transform:translateY(1px) scale(.98);box-shadow:inset 0 1px 0 rgba(255,255,255,.5),-3px 5px 10px -5px rgba(77,141,255,.6),4px 5px 10px -5px rgba(255,79,163,.55)}
+
+html{overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body{overflow-x:hidden}
+#chk,#chk .card{width:100%;max-width:100%}
+/* เอฟเฟคตอนแตะ */
+.ripple{position:absolute;border-radius:50%;pointer-events:none;opacity:1;transform:translate(-50%,-50%) scale(0);animation:rip .7s ease-out forwards}
+#chk .btn>.ripple{z-index:-1;width:150px;height:150px;background:radial-gradient(circle,rgba(255,255,255,.6),rgba(255,255,255,0) 70%)}
+@keyframes rip{to{transform:translate(-50%,-50%) scale(1.7);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ripple,#chk .card.run,#chk .card.run::after{animation:none}}
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+#chk .card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:2.5px;background:conic-gradient(from var(--a),transparent 0 55%,rgba(77,141,255,.9) 70%,rgba(255,79,163,.95) 88%,#fff 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);mask-composite:exclude;opacity:0;pointer-events:none}
+#chk .card.run::after{animation:orbit 1.5s linear forwards,orbitfade 1.5s ease forwards}
+@keyframes orbit{from{--a:0deg}to{--a:360deg}}
+@keyframes orbitfade{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
+#chk .card.run{animation:afterglow 3s ease-out}
+@keyframes afterglow{0%,45%{box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -14px 28px rgba(77,141,255,.18),0 14px 40px rgba(77,141,255,.35),0 0 24px rgba(255,79,163,.15)}65%{box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -14px 28px rgba(77,141,255,.26),0 14px 46px rgba(77,141,255,.5),0 0 40px rgba(255,79,163,.3)}100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.5),inset 0 -14px 28px rgba(77,141,255,.18),0 14px 40px rgba(77,141,255,.35),0 0 24px rgba(255,79,163,.15)}}
+
+.cover{background:linear-gradient(180deg,rgba(6,10,28,0) 55%,rgba(6,10,28,.6)),url("https://files.catbox.moe/1d9kio.jpg") center/cover no-repeat,#0b1f6b}
+.avatar{overflow:hidden;padding:0}
+.avatar img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+
+/* ปก: กระจก + ไฟวิ่งรอบขอบ + แสงวิบวับ */
+.cover{margin:0;height:240px;border-radius:0;border:0;background:#0b1f6b;-webkit-mask-image:radial-gradient(ellipse 80% 170px at 50% 100%,transparent 45%,#000 92%);mask-image:radial-gradient(ellipse 80% 170px at 50% 100%,transparent 45%,#000 92%)}
+.cover::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(125deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 45%)}
+.glint{z-index:2;position:absolute;top:-30%;bottom:-30%;left:0;width:45%;pointer-events:none;mix-blend-mode:screen;transform:translateX(-160%) skewX(-22deg);background:linear-gradient(90deg,transparent 0%,transparent 22%,rgba(255,255,255,.55) 30%,transparent 33%,rgba(255,255,255,.35) 40%,transparent 42%,rgba(255,255,255,.75) 50%,transparent 54%,rgba(255,255,255,.25) 62%,transparent 100%);animation:glint 5s ease-in-out infinite}
+@keyframes glint{0%{transform:translateX(-160%) skewX(-22deg)}45%,100%{transform:translateX(330%) skewX(-22deg)}}
+.tw{z-index:2;position:absolute;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border-radius:50%;background:#fff;pointer-events:none;opacity:0;box-shadow:0 0 6px 2px rgba(255,255,255,.8),0 0 14px 4px rgba(77,141,255,.6);animation:tw 3.2s ease-in-out infinite}
+.tw::before,.tw::after{content:"";position:absolute;left:50%;top:50%;background:linear-gradient(transparent,#fff,transparent)}
+.tw::before{width:1.5px;height:22px;margin:-11px 0 0 -.75px}
+.tw::after{width:22px;height:1.5px;margin:-.75px 0 0 -11px;background:linear-gradient(90deg,transparent,#fff,transparent)}
+@keyframes tw{0%,100%{opacity:0;transform:scale(.3)}50%{opacity:1;transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.coverwrap::after,.glint,.tw{animation:none}}
+
+.coverwrap{position:relative;isolation:isolate;margin:0}
+/* เบลอไล่ระดับ: ด้านบนคม ค่อยๆ ฝ้าขึ้นเรื่อยๆ ลงมาด้านล่าง */
+.bgl{position:absolute;inset:-24px;pointer-events:none;background:url("https://files.catbox.moe/1d9kio.jpg") center/cover no-repeat}
+.bgl.b1{filter:blur(1.5px);-webkit-mask-image:linear-gradient(180deg,transparent 25%,#000 48%);mask-image:linear-gradient(180deg,transparent 25%,#000 48%)}
+.bgl.b2{filter:blur(3.5px);-webkit-mask-image:linear-gradient(180deg,transparent 45%,#000 68%);mask-image:linear-gradient(180deg,transparent 45%,#000 68%)}
+.bgl.b3{filter:blur(10px);-webkit-mask-image:linear-gradient(180deg,transparent 62%,#000 90%);mask-image:linear-gradient(180deg,transparent 62%,#000 90%)}
+
+/* หน้าโหลด Welcome */
+#ld{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 20% 15%,rgba(77,141,255,.28),transparent 50%),radial-gradient(circle at 85% 80%,rgba(243,179,220,.2),transparent 50%),#060a1c;transition:opacity .7s ease,transform .7s ease,visibility .7s;overflow:hidden}
+#ld.out{opacity:0;transform:scale(1.06);visibility:hidden;pointer-events:none}
+.ld-w{font:600 clamp(40px,13vw,64px)/1.1 'Prompt',system-ui,sans-serif;letter-spacing:.04em;color:#eef2ff;display:flex}
+.ld-w span{display:inline-block;color:#eef2ff;opacity:0;transform:translateY(28px) scale(.8);filter:blur(10px);animation:ldin .7s cubic-bezier(.2,.9,.3,1.2) forwards,ldglow 2.4s ease-in-out infinite;animation-delay:calc(var(--i)*.09s),calc(.9s + var(--i)*.12s)}
+@keyframes ldin{to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes ldglow{0%,100%{color:#eef2ff;text-shadow:0 0 12px rgba(77,141,255,.6)}50%{color:#ffd9ee;text-shadow:0 0 22px rgba(243,179,220,.85),0 0 42px rgba(77,141,255,.55)}}
+.ld-s{margin-top:10px;font:500 14px 'Prompt',system-ui,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#8fa3d8;opacity:0;animation:ldfade .8s ease 1s forwards}
+@keyframes ldfade{to{opacity:1}}
+.ld-b{margin-top:26px;width:120px;height:4px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden;opacity:0;animation:ldfade .6s ease 1.1s forwards}
+.ld-b i{display:block;height:100%;width:40%;border-radius:99px;background:linear-gradient(90deg,#3b82ff,#8b5cf6,#f3b3dc);box-shadow:0 0 10px rgba(77,141,255,.8);animation:ldbar 1.3s ease-in-out infinite}
+@keyframes ldbar{0%{transform:translateX(-100%)}100%{transform:translateX(300%)}}
+@media (prefers-reduced-motion:reduce){.ld-w span{animation:none;opacity:1;transform:none;filter:none}.ld-s,.ld-b{animation:none;opacity:1}.ld-b i{animation:none;width:100%}#ld{transition:opacity .3s}}
+
+/* ปุ่มเมนู 3 ขีด + เมนูกระจก */
+.mnb{position:absolute;left:20px;top:122px;z-index:6;width:44px;height:44px;border:0;background:transparent;box-shadow:none;cursor:pointer;padding:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent}
+.mnb i{display:block;width:26px;height:3px;border-radius:3px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(236,226,214,.7));box-shadow:0 1px 3px rgba(6,10,28,.45),0 0 8px rgba(255,255,255,.25);transition:transform .25s,opacity .2s}
+.mnb.on i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.mnb.on i:nth-child(2){opacity:0}
+.mnb.on i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+.mnl{position:absolute;left:20px;top:174px;z-index:6;min-width:176px;text-align:left;padding:8px;border-radius:20px;border:1px solid rgba(255,255,255,.28);border-top-color:rgba(255,255,255,.5);background:linear-gradient(155deg,rgba(40,70,160,.82),rgba(60,40,130,.8));-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:0 14px 30px rgba(6,10,28,.55),inset 0 1px 0 rgba(255,255,255,.4);opacity:0;transform:translateY(-8px) scale(.96);transform-origin:top left;pointer-events:none;transition:opacity .2s,transform .2s}
+.mnl.on{opacity:1;transform:none;pointer-events:auto}
+.mnl a{display:block;padding:11px 14px;border-radius:14px;font-size:15px;font-weight:500;color:#eef2ff;cursor:pointer}
+.mnl a.on{background:rgba(255,255,255,.16);box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+@media (prefers-reduced-motion:reduce){.mnl,.mnb i{transition:none}}
+
+/* พื้นหลัง: ตัวเลข 0/1 ลอยจากล่างขึ้นบน (สไตล์ Data) */
+.fx .dg{position:absolute;bottom:-240px;font:400 13px/1.3 'Share Tech Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre;text-align:center;opacity:0;animation:dgrise linear infinite;-webkit-mask-image:linear-gradient(180deg,transparent,#000 35%,#000 65%,transparent);mask-image:linear-gradient(180deg,transparent,#000 35%,#000 65%,transparent)}
+@keyframes dgrise{0%{transform:translateY(0);opacity:0}12%{opacity:var(--o,.7)}88%{opacity:var(--o,.7)}100%{transform:translateY(-135vh);opacity:0}}
+@media (prefers-reduced-motion:reduce){.fx .dg{animation:none;opacity:.18;bottom:20%}}
+</style>
+</head>
+<body>
+<div id="ld"><div class="ld-w" aria-label="Welcome"><span style="--i:0">W</span><span style="--i:1">e</span><span style="--i:2">l</span><span style="--i:3">c</span><span style="--i:4">o</span><span style="--i:5">m</span><span style="--i:6">e</span></div><div class="ld-s">Junchen Studio</div><div class="ld-b"><i></i></div></div>
+<script>
+(function(){var l=document.getElementById('ld'),t0=Date.now(),d=0;
+function hide(){if(d)return;d=1;l.classList.add('out');setTimeout(function(){if(l.parentNode)l.parentNode.removeChild(l)},800)}
+function wait(){setTimeout(hide,Math.max(0,2600-(Date.now()-t0)))}
+if(document.readyState==='complete')wait();else addEventListener('load',wait);
+setTimeout(hide,7000)})();
+</script>
+<div class="fx" id="fx"><canvas id="rp"></canvas></div>
+<div class="wrap">
+  <div class="coverwrap"><div class="cover"><span class="bgl"></span><span class="bgl b1"></span><span class="bgl b2"></span><span class="bgl b3"></span><span class="glint"></span><span class="tw" style="left:16%;top:26%;animation-delay:0.0s"></span><span class="tw" style="left:82%;top:22%;animation-delay:1.1s"></span><span class="tw" style="left:60%;top:62%;animation-delay:2.0s"></span><span class="tw" style="left:34%;top:70%;animation-delay:0.6s"></span></div></div>
+  <div class="profile" id="home">
+    <button class="mnb" id="mnb" aria-label="เมนู" aria-expanded="false" onclick="mnT(event)"><i></i><i></i><i></i></button>
+    <div class="mnl" id="mnl"><a class="on" data-t="qc" onclick="pick('qc')">เช็คคิวงาน</a><a data-t="tmc" onclick="pick('tmc')">ชำระทรูมันนี่</a></div>
+    <div class="avatar"><img src="https://files.catbox.moe/g23uhu.jpg" alt="Junchen Studio"></div>
+    <h1>Junchen Studio</h1>
+    <div class="svc"><span class="sv d">รับฟาร์มเพชร</span><span class="sv s">อ่านสตอรี่</span></div>
+    <div class="tags"><span class="tag">เปิดรับคิว</span><span class="tag">ส่งงานภายใน 24 ชม.</span></div>
+  </div>
+  <section id="chk">
+    <div class="card" id="qc">
+      <h2>เช็คคิวงาน</h2>
+      <p class="muted" style="margin:0 0 4px">พิมพ์รหัสคิวที่ได้ตอนสั่งงาน (เช่น #4821) หรือชื่อ Facebook</p>
+      <div class="row"><input id="q" placeholder="รหัสคิว เช่น #4821 หรือชื่อ" autocomplete="off"><button class="btn" onclick="find()">ค้นหา</button></div>
+      <div id="res"></div>
+    </div>
+    <div class="card" id="tmc" style="display:none">
+      <h2>ชำระทรูมันนี่</h2>
+      <p class="muted" style="margin:0 0 4px">สร้างซองของขวัญทรูมันนี่ตามยอดที่ตกลงกัน แล้ววางลิงก์ซองด้านล่าง ระบบจะรับซองให้อัตโนมัติ</p>
+      <input id="tmn" placeholder="ชื่อ หรือรหัสคิว เช่น #4821" autocomplete="off" style="width:100%;margin-top:10px">
+      <div class="row"><input id="tml" placeholder="ลิงก์ซอง gift.truemoney.com/..." autocomplete="off" inputmode="url"><button class="btn" id="tmb" onclick="sendTm()">ส่งซอง</button></div>
+      <div id="tres" style="margin-top:14px"></div>
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){var c=document.getElementById('rp'),x=c.getContext('2d'),R=[],w,h,d=Math.min(window.devicePixelRatio||1,2),lx=0,ly=0,rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+function rs(){w=innerWidth;h=innerHeight;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0)}
+rs();addEventListener('resize',rs);
+var G={x:innerWidth/2,y:innerHeight/3};function add(px,py,big){if(R.length>60)R.shift();R.push({x:px,y:py,r:16,m:big?260:170,a:big?.5:.3,h:[212,222,330,300][Math.floor(Math.random()*4)]})}
+function mv(px,py){var dx=px-lx,dy=py-ly;if(dx*dx+dy*dy>350){lx=px;ly=py;add(px,py,0)}}
+addEventListener('pointermove',function(e){mv(e.clientX,e.clientY)});
+addEventListener('touchmove',function(e){var t=e.touches[0];if(t)mv(t.clientX,t.clientY)},{passive:true});
+addEventListener('pointerdown',function(e){add(e.clientX,e.clientY,1)});
+function tick(){x.clearRect(0,0,w,h);x.globalCompositeOperation='lighter';if(lx||ly){G.x+=(lx-G.x)*.08;G.y+=(ly-G.y)*.08}var q=x.createRadialGradient(G.x,G.y,0,G.x,G.y,200);q.addColorStop(0,'hsla(220,100%,62%,.22)');q.addColorStop(1,'hsla(220,100%,62%,0)');x.fillStyle=q;x.fillRect(0,0,w,h);for(var i=R.length-1;i>=0;i--){var p=R[i];p.r+=1.4;var k=p.r/p.m;if(k>=1){R.splice(i,1);continue}var a=p.a*(1-k),g=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);g.addColorStop(0,'hsla('+p.h+',100%,55%,'+a+')');g.addColorStop(1,'hsla('+p.h+',100%,50%,0)');x.fillStyle=g;x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill()}requestAnimationFrame(tick)}
+if(!rm){tick();setInterval(function(){add(Math.random()*w,Math.random()*h,0)},2500)}})();
+(function(){var f=document.getElementById('fx'),C=['#4d8dff','#6aa5ff','#ff4fa3','#b48cff','#eef2ff'];
+for(var i=0;i<28;i++){var n=8+Math.floor(Math.random()*8),t=[];for(var k=0;k<n;k++)t.push(Math.random()<.5?'0':'1');
+var s=document.createElement('span'),c=C[i%C.length],sm=Math.random()<.35;s.className='dg';s.textContent=t.join('\n');
+s.style.left=(Math.random()*96)+'%';s.style.fontSize=(sm?10:12+Math.random()*7)+'px';s.style.color=c;
+s.style.textShadow='0 0 8px '+c;if(sm)s.style.filter='blur(.8px)';
+s.style.setProperty('--o',(sm?.3:.45+Math.random()*.4).toFixed(2));
+s.style.animationDuration=(8+Math.random()*10)+'s';s.style.animationDelay=(-Math.random()*18)+'s';f.appendChild(s)}})();
+var API="https://script.google.com/macros/s/AKfycbwjnoUxkZTcv0KqTv0mfnA07LI93hG3mSoHB9D-LeyZaFkV7TmhVy4FYg8Yh1lHR6vfRw/exec";
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function go(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth"})}
+function find(){
+  var q=document.getElementById("q").value.trim(),r=document.getElementById("res");
+  if(!q){r.innerHTML="";return}
+  var cd0=document.querySelector("#chk .card");cd0.classList.remove("run");void cd0.offsetWidth;cd0.classList.add("run");
+  if(API.indexOf("http")!==0){r.innerHTML='<div class="muted">ยังไม่ได้ใส่ลิงก์ API ในโค้ด</div>';return}
+  r.innerHTML='<div class="muted">กำลังค้นหา...</div>';
+  fetch(API+"?q="+encodeURIComponent(q)).then(function(x){return x.json()}).then(function(m){
+    if(!m.length){r.innerHTML='<div class="muted">ไม่พบคิวของชื่อนี้ ลองตรวจตัวสะกดหรือทักแชทสอบถามได้นะคะ</div>';return}
+    show(m.slice(0,5));
+  }).catch(function(){r.innerHTML='<div class="muted">เชื่อมต่อไม่ได้ในตอนนี้ ลองใหม่อีกครั้งนะคะ</div>'});
+}
+function show(m){
+  var r=document.getElementById("res");
+  var h="";m.forEach(function(d){var u=d.job==="อ่านสตอรี่"?"บท":"เพชร",t=+d.tot||0,n=+d.done||0,pc=t>0?Math.min(100,Math.round(n*100/t)):0,c=d.s==="เสร็จแล้ว"?"ok":d.s==="กำลังทำ"?"go":"wt";h+='<div class="item"><div class="top"><div><b>'+esc(d.n)+'</b><div class="muted">'+esc(d.id)+'</div></div><span class="st '+c+'">'+esc(d.s)+'</span></div><div class="muted">'+esc(d.job)+'</div><div class="bar"><i style="width:'+pc+'%"></i></div><div class="bt"><span>'+n.toLocaleString()+' / '+t.toLocaleString()+' '+u+'</span><b>'+pc+'%</b></div><div class="muted">'+((+d.q>0&&d.s!=="เสร็จแล้ว")?'<span class="qb">คิวที่ '+d.q+'</span>':'')+'อัปเดต '+esc(d.d)+'</div></div>'});
+  r.innerHTML=h;
+}
+function mnC(){document.getElementById("mnl").classList.remove("on");var b=document.getElementById("mnb");b.classList.remove("on");b.setAttribute("aria-expanded","false")}
+function mnT(e){e.stopPropagation();var l=document.getElementById("mnl"),b=document.getElementById("mnb"),o=!l.classList.contains("on");l.classList.toggle("on",o);b.classList.toggle("on",o);b.setAttribute("aria-expanded",o?"true":"false")}
+function pick(id){
+  ["qc","tmc"].forEach(function(k){document.getElementById(k).style.display=k===id?"":"none"});
+  Array.prototype.forEach.call(document.querySelectorAll("#mnl a"),function(a){a.classList.toggle("on",a.getAttribute("data-t")===id)});
+  mnC();go("chk");
+}
+document.addEventListener("pointerdown",function(e){if(!e.target.closest("#mnl,#mnb"))mnC()});
+function sendTm(){
+  var nm=document.getElementById("tmn").value.trim(),lk=document.getElementById("tml").value.trim(),r=document.getElementById("tres"),b=document.getElementById("tmb");
+  if(nm.length<2){r.innerHTML='<div class="muted">กรุณาใส่ชื่อหรือรหัสคิวก่อนนะคะ</div>';return}
+  var m=lk.match(/[?&]v=([0-9A-Za-z]{10,40})/);
+  if(!m||lk.indexOf("gift.truemoney.com")<0){r.innerHTML='<div class="muted">ลิงก์ซองไม่ถูกต้อง ต้องเป็นลิงก์ที่ขึ้นต้นด้วย gift.truemoney.com</div>';return}
+  b.disabled=true;r.innerHTML='<div class="muted">กำลังรับซอง...</div>';
+  fetch(API,{method:"POST",body:JSON.stringify({action:"tmn",name:nm,code:m[1]})}).then(function(x){return x.json()}).then(function(d){
+    if(d.ok){r.innerHTML='<div class="item"><div class="top"><b>รับซองสำเร็จ</b><span class="st ok">สำเร็จ</span></div><div class="big">฿'+esc(d.amount)+'</div><div class="muted">ขอบคุณค่ะ รอรับงานได้เลย</div></div>';document.getElementById("tml").value=""}
+    else{r.innerHTML='<div class="item"><div class="top"><b>'+esc(d.msg||"รับซองไม่สำเร็จ")+'</b><span class="st wt">แจ้งแอดมิน</span></div><div class="muted">ถ้าส่งซองแล้ว ทักแชทแจ้งชื่อกับรหัสคิวได้เลยนะคะ</div></div>'}
+  }).catch(function(){r.innerHTML='<div class="muted">เชื่อมต่อไม่ได้ในตอนนี้ ยังไม่ได้ตัดซอง ลองใหม่อีกครั้งนะคะ</div>'}).then(function(){b.disabled=false});
+}
+document.getElementById("q").addEventListener("keydown",function(e){if(e.key==="Enter")find()});
+
+document.addEventListener("pointerdown",function(e){
+  if(window.matchMedia("(prefers-reduced-motion:reduce)").matches)return;
+  var t=e.target.closest&&e.target.closest("#chk .btn");if(!t)return;
+  var host=t,r=host.getBoundingClientRect(),s=document.createElement("span");
+  s.className="ripple";s.style.left=(e.clientX-r.left)+"px";s.style.top=(e.clientY-r.top)+"px";
+  host.appendChild(s);s.addEventListener("animationend",function(){s.remove()});
+});
+</script>
+</body>
+</html>
